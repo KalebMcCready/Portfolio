@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat AI</title>
+  <link rel="stylesheet" href="ai.css"> <!-- Link to your CSS file for styling -->
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Chat AI</h1>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Home</a></li> <!-- Link back to your portfolio page -->
+          <!-- Add more navigation links as needed -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <div id="chat-container">
+      <div id="chat-history"></div> <!-- Container for displaying chat history -->
+      <input type="text" id="user-input" placeholder="Type your message..."> <!-- Input field for user messages -->
+      <button id="send-button">Send</button> <!-- Button to send user message -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Chat AI</p>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> <!-- Link to TensorFlow.js library -->
+  <script src="chat.js"></script> <!-- Link to your JavaScript file for chat AI logic -->
+</body>
+</html>

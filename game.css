@@ -1,0 +1,87 @@
+body {
+    background-color: #1f1f2e;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+#gameContainer {
+    border: 2px solid #ccc;
+    position: relative;
+    margin-bottom: 20px; /* Space between canvas and review */
+}
+
+canvas {
+    display: block;
+    margin: 0 auto; /* Center the canvas */
+}
+
+#store {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    color: #333; /* Contrast for readability */
+}
+
+#goldDisplay {
+    margin-top: 10px;
+}
+
+button {
+    display: block;
+    margin-bottom: 5px;
+    background-color: #007bff; /* Blue background for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+#homeButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#gameReview {
+    margin: 20px;
+    padding: 10px;
+    background-color: #2c2f38; /* Slightly lighter than body bg */
+    border-left: 5px solid #007bff; /* Blue border on the left */
+    color: #cccccc; /* Light gray text for readability */
+    font-size: 14px;
+    line-height: 1.6; /* Improved line spacing for readability */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#gameReview h3 {
+    color: #ffffff; /* White color for headings */
+    margin-top: 0;
+}
+
+#gameReview ul {
+    padding-left: 20px; /* Indent the list */
+    list-style-type: none; /* No bullet points */
+}
+
+#gameReview li {
+    margin-bottom: 10px; /* Space between list items */
+}
+
+#gameReview li strong {
+    color: #80bdff; /* Lighter blue for key terms */
+}
+
+
+p {
+    margin: 0;
+}
