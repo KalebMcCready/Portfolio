@@ -34,16 +34,20 @@ canvas {
 button {
     display: block;
     margin-bottom: 5px;
+    background-image: url('path/to/your-texture-image.jpg'); /* Texture image for buttons */
     background-color: #007bff; /* Blue background for buttons */
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    background-size: cover; /* Cover the entire button area */
+    background-blend-mode: multiply; /* Blend the texture with the background color */
 }
 
 button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; /* Darker blue on hover, maintain texture */
+    background-blend-mode: multiply; /* Ensure texture blends with hover color */
 }
 
 #homeButton {
