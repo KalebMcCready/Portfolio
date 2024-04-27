@@ -7,10 +7,11 @@ body {
 }
 
 #gameContainer {
-    position: relative; /* Add this if not already present */
-    border: 2px solid #ccc;
-    margin: 0 auto; /* Centers the container if needed */
-    margin-bottom: 20px; /* Space between the container and other elements */
+    position: relative; /* Ensures positioning is relative to this container */
+    width: 800px; /* Adjust the width as necessary */
+    height: 600px; /* Adjust the height to fit the canvas and other contents */
+    margin: 0 auto; /* Center the container on the page */
+    border: 2px solid #ccc; /* Existing border style */
 }
 
 canvas {
@@ -20,12 +21,13 @@ canvas {
 
 #store {
     position: absolute;
-    bottom: 10px;  /* Moves the store to the bottom of the game container */
+    bottom: 10px;  /* Places the store 10 pixels above the bottom of the gameContainer */
     right: 10px;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
-    color: #333; /* Contrast for readability */
+    color: #333; /* Ensures text is readable against the light background */
+    width: 300px; /* You might want to set a specific width */
 }
 
 #goldDisplay {
