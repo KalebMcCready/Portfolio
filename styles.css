@@ -105,5 +105,8 @@ footer {
 @media (max-width: 768px) {
   .skills p {
     flex: 0 0 100%; /* Full width on smaller screens */
+    padding: 15px; /* Increased padding */
+    font-size: 14px; /* Reduced font size */
+    height: auto; /* Auto height for flexibility */
   }
 }
