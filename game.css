@@ -7,9 +7,10 @@ body {
 }
 
 #gameContainer {
+    position: relative; /* Add this if not already present */
     border: 2px solid #ccc;
-    position: relative;
-    margin-bottom: 20px; /* Space between canvas and review */
+    margin: 0 auto; /* Centers the container if needed */
+    margin-bottom: 20px; /* Space between the container and other elements */
 }
 
 canvas {
@@ -19,7 +20,7 @@ canvas {
 
 #store {
     position: absolute;
-    bottom: 10px;
+    bottom: 10px;  /* Moves the store to the bottom of the game container */
     right: 10px;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
