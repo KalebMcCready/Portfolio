@@ -5,6 +5,16 @@ body, h1, h2, h3, p, ul, li, button, input {
   box-sizing: border-box;
 }
 
+@media only screen and (max-width: 600px) {
+  #chat-container {
+      width: 100%;
+      margin: 0 auto;
+      bottom: 0;
+      right: 0;
+      left: 0;
+  }
+}
+
 /* Set font family and color */
 body {
   font-family: Arial, sans-serif;

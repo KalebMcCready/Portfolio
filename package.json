@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Tower Defense Game Welcome to our Tower Defense Game! This game features strategic gameplay where players must defend their castle by placing various types of towers along the enemy's path. Enemies come in waves, and each type of enemy has unique characteristics. Players earn gold by defeating enemies, which can be used to buy and upgrade towers.",
+  "main": "chat.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "express": "^4.19.2"
+  }
+}
