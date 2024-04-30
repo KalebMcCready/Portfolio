@@ -2,6 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const chatHistory = document.getElementById("chat-history");
   const userInput = document.getElementById("user-input");
   const sendButton = document.getElementById("send-button");
+  const fs = require('fs');
+  let rawdata = fs.readFileSync('config.json');
+  let config = JSON.parse(rawdata);
+  const newsApiKey = config.newsApiKey;
+
 
  function addMessageToChat(message, sender) {
   const messageElement = document.createElement("div");
