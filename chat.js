@@ -6,7 +6,17 @@ document.addEventListener("DOMContentLoaded", function() {
   let rawdata = fs.readFileSync('config.json');
   let config = JSON.parse(rawdata);
   const newsApiKey = config.newsApiKey;
+  const axios = require('axios');
 
+  async function fetchNews(keyword) {
+    try {
+      const response = await axios.get(`https://newsdata.io/api/1/news?apikey=${newsApiKey}&q=${keyword}`);
+      return response.data.results.map(article => `${article.title}: ${article.link}`).join('\n');
+    } catch (error) {
+      console.error('Error fetching news:', error);
+      return "Failed to retrieve news.";
+    }
+  }
 
  function addMessageToChat(message, sender) {
   const messageElement = document.createElement("div");
