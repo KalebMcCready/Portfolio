@@ -1,101 +1,118 @@
 document.addEventListener("DOMContentLoaded", function() {
-  loadChatHistory();
   const chatHistory = document.getElementById("chat-history");
   const userInput = document.getElementById("user-input");
   const sendButton = document.getElementById("send-button");
 
-  function addMessageToChat(message, sender) {
-    const messageElement = document.createElement("div");
-    const date = new Date();
-    const timestamp = date.toLocaleTimeString();
-    messageElement.textContent = `${timestamp} ${sender}: ${message}`;
-    chatHistory.appendChild(messageElement);
-    updateScroll();
-    saveChatHistory();
-}  
-function sanitizeInput(input) {
-  const div = document.createElement('div');
-  div.textContent = input;
-  return div.innerHTML;
+ function addMessageToChat(message, sender) {
+  const messageElement = document.createElement("div");
+  messageElement.className = 'message';
+  messageElement.textContent = `${sender}: ${message}`;
+  messageElement.classList.add(sender === 'User' ? 'user-message' : 'ai-message');
+  chatHistory.appendChild(messageElement);
+  updateScroll();
+  saveChatHistory();
 }
 
-function processUserInput() {
-  const userMessage = sanitizeInput(userInput.value.trim());
-  if (userMessage !== "") {
-      addMessageToChat(userMessage, "User");
-      respondToUserMessage(userMessage);
-      userInput.value = "";
+function scheduleMessage(command) {
+  const parts = command.split(" ");
+  const delay = parseInt(parts[1], 10);
+  const message = parts.slice(2).join(" ");
+
+  if (!isNaN(delay) && message) {
+    addMessageToChat(`Scheduled message "${message}" to be sent in ${delay} seconds.`, "System");
+    setTimeout(() => {
+      addMessageToChat(message, "User");
+      respondToUserMessage(message);
+    }, delay * 1000);
+  } else {
+    addMessageToChat("Invalid schedule command. Use the format: /schedule [seconds] [message]", "System");
   }
 }
 
-  function updateScroll(){
-    var chatHistory = document.getElementById("chat-history");
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-}
-
+  function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+  }
 
   function processUserInput() {
-    const userMessage = userInput.value.trim();
-    if (userMessage !== "") {
+  const userMessage = userInput.value.trim();
+  if (userMessage !== "") {
+    if (userMessage.startsWith("/schedule")) {
+      scheduleMessage(userMessage);
+    } else {
       addMessageToChat(userMessage, "User");
       respondToUserMessage(userMessage);
-      userInput.value = "";
     }
+    userInput.value = "";
+  }
+}
+
+  function updateScroll() {
+    chatHistory.scrollTop = chatHistory.scrollHeight;
   }
 
   function respondToUserMessage(message) {
-    let response;
-    // Example responses based on user input
-    switch (message.toLowerCase()) {
-      case "hi":
-      case "hello":
-        response = "Hello there!";
-        break;
-      case "how are you?":
-        response = "I'm just a chatbot, but thanks for asking!";
-        break;
-      case "who is Kaleb McCready?":
-        response = "Kaleb McCready is a talented individual with skills in various areas.";
-        break;
-      // Add more responses as needed
-      default:
-        response = "I'm sorry, I don't understand that, but you know who would? Kaleb McCready!";
-    }
-    setTimeout(() => addMessageToChat(response, "Chat AI"), 500); // Simulate typing delay
-    addTypingIndicator();
     setTimeout(() => {
-        removeTypingIndicator();
-        addMessageToChat(response, "Chat AI");
-    }, 500);
+      addTypingIndicator();
+      let response = generateResponse(message);
+      setTimeout(() => {
+          removeTypingIndicator();
+          addMessageToChat(response, "Chat AI");
+      }, 1000); // Simulate thinking delay
+    }, 500); // Simulate typing delay
   }
+
+  function generateResponse(input) {
+  if (input.startsWith("/")) {
+    switch (input) {
+      case "/help":
+        return "You can ask me anything! Try typing 'hello', 'how are you?', or 'what is your name?'.";
+      default:
+        return "Unknown command. Type '/help' for assistance.";
+    }
+  }
+  const responses = {
+    "hello": "Hello there! How can I assist you today?",
+    "how are you?": "I'm just a chatbot, but I'm doing great, thanks!",
+    "what is your name?": "I'm a friendly chatbot created to assist you.",
+    "default": "Sorry, I didn't understand that. Can you try rephrasing?"
+  };
+  return responses[input.toLowerCase()] || responses["default"];
+}
+
   function addTypingIndicator() {
     const typingIndicator = document.createElement("div");
     typingIndicator.textContent = "Chat AI is typing...";
     typingIndicator.id = "typing-indicator";
     chatHistory.appendChild(typingIndicator);
     updateScroll();
-}
-function removeTypingIndicator() {
-  const typingIndicator = document.getElementById("typing-indicator");
-  if (typingIndicator) {
+  }
+
+  function removeTypingIndicator() {
+    const typingIndicator = document.getElementById("typing-indicator");
+    if (typingIndicator) {
       chatHistory.removeChild(typingIndicator);
+    }
   }
-}
 
-function loadChatHistory() {
-  const history = localStorage.getItem("chatHistory");
-  if (history) {
+  function loadChatHistory() {
+    const history = localStorage.getItem("chatHistory");
+    if (history) {
       chatHistory.innerHTML = history;
+    }
   }
-}
 
-function saveChatHistory() {
-  localStorage.setItem("chatHistory", chatHistory.innerHTML);
-}
+  function saveChatHistory() {
+    localStorage.setItem("chatHistory", chatHistory.innerHTML);
+  }
+
   sendButton.addEventListener("click", processUserInput);
   userInput.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
       processUserInput();
     }
   });
+
+  loadChatHistory();
 });
