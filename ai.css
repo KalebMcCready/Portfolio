@@ -5,24 +5,13 @@ body, h1, h2, h3, p, ul, li, button, input {
   box-sizing: border-box;
 }
 
-@media only screen and (max-width: 600px) {
-  #chat-container {
-      width: 100%;
-      margin: 0 auto;
-      bottom: 0;
-      right: 0;
-      left: 0;
-  }
-}
-
-/* Set font family and color */
 body {
   font-family: Arial, sans-serif;
   color: #333; /* Text color */
   background-color: #f4f4f4; /* Background color */
 }
 
-.container {
+.container, .instructions {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -32,11 +21,13 @@ header {
   background-color: #007bff; /* Header background color (blue) */
   color: #fff; /* Header text color */
   padding: 10px 0;
+  text-align: center;
   border-radius: 15px; /* Rounded corners */
 }
 
 header nav ul {
   list-style-type: none;
+  padding: 0;
 }
 
 header nav ul li {
@@ -49,12 +40,62 @@ header nav ul li a {
   text-decoration: none;
 }
 
-header nav ul li a:hover {
-  text-decoration: underline;
+/* General style for chat messages */
+.message {
+  padding: 10px 15px;  /* Slightly increased padding for better text containment */
+  margin: 5px 10px;  /* Uniform margin for better layout */
+  border-radius: 20px;  /* Rounded corners for a softer look */
+  max-width: 80%;  /* Limiting maximum width for better readability */
+  word-wrap: break-word;  /* Ensures long words do not overflow */
+  color: #333;  /* Darker text color for better contrast */
+  font-size: 1rem;  /* Adequate font size for readability */
+  line-height: 1.4;  /* Increased line spacing for better legibility */
+  display: block;
+  position: relative;
 }
 
-main {
-  padding: 20px;
+/* Style for user messages */
+.user-message {
+  background-color: #dcf8c6;  /* Light green background for user messages */
+  align-self: flex-end;  /* Align user messages to the right */
+  margin-left: auto;  /* Automatic margin for alignment */
+  text-align: right;  /* Right-align text for user messages */
+}
+
+/* Style for AI messages */
+.ai-message {
+  background-color: #f0f0f0;  /* Light gray background for AI messages */
+  align-self: flex-start;  /* Align AI messages to the left */
+  text-align: left;  /* Left-align text for AI messages */
+}
+
+/* Container for the chat history */
+#chat-history {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;  /* Enable vertical scroll bar */
+  height: 300px;  /* Increased height for more visible history */
+  background-color: #fff;  /* Light background for the chat area */
+  padding: 10px;  /* Padding around the chat messages */
+  border-radius: 15px;  /* Rounded corners for the container */
+}
+
+.instructions {
+  background-color: #fff; /* White background for clarity */
+  color: #333; /* Dark text for readability */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px; /* Space before chat container */
+  padding: 15px;
+  line-height: 1.6; /* Improved line spacing for readability */
+}
+
+.instructions h2 {
+  color: #007bff; /* Blue color to tie in with header */
+}
+
+.instructions ul {
+  padding-left: 20px; /* Space for bullet points */
 }
 
 #chat-container {
@@ -76,25 +117,19 @@ main {
   border-radius: 15px; /* Rounded corners */
 }
 
-#user-input {
+#user-input, #send-button {
   width: calc(100% - 22px); /* Adjusted width to account for padding and border */
   margin-bottom: 10px;
   padding: 8px 12px;
-  border: none;
   background-color: #fff; /* Input field background color (white) */
-  color: #007bff; /* Input field text color */
+  color: #007bff; /* Input field and button text color */
   border-radius: 15px; /* Rounded corners */
+  border: none;
 }
 
 #send-button {
-  display: block;
-  margin: 0 auto;
-  background-color: #007bff; /* Button background color (blue) */
-  color: #fff; /* Button text color */
-  border: none;
-  padding: 10px 20px;
   cursor: pointer;
-  border-radius: 15px; /* Rounded corners */
+  background-color: #007bff; /* Button background color (blue) */
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
@@ -102,3 +137,12 @@ main {
 #send-button:hover {
   background-color: #0056b3; /* Button background color on hover (darker blue) */
 }
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #f4f4f4;
+  color: #333;
+  border-top: 1px solid #ccc;
+}
+
