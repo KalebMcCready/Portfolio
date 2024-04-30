@@ -79,6 +79,14 @@ function scheduleMessage(command) {
   }
 
   function generateResponse(input) {
+    if (input.toLowerCase().startsWith("news about")) {
+      const keyword = input.substring(11).trim();
+      if (keyword) {
+        return fetchNews(keyword);
+      } else {
+        return "Please specify a topic to get news about.";
+      }
+    }
   if (input.startsWith("/")) {
     switch (input) {
       case "/help":
