@@ -10,7 +10,6 @@
   <header>
     <div class="container">
       <h1>Chat AI</h1>
-      <h1>Work In Progress</h1>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -18,12 +17,23 @@
       </nav>
     </div>
   </header>
-  
+
   <main>
     <div id="chat-container">
       <div id="chat-history"></div>
-      <input type="text" id="user-input" placeholder="Type your message...">         <button id="send-button">Send</button>
+      <input type="text" id="user-input" placeholder="Type your message here...">
+      <button id="send-button">Send</button>
     </div>
+    <section class="instructions">
+      <h2>How to Use Chat AI</h2>
+      <p>Welcome to Chat AI! You can interact with the AI by typing your messages below. Here are some commands and inputs the AI recognizes:</p>
+      <ul>
+        <li><strong>Hello, How are you?</strong> - Standard greetings that the AI will respond to warmly.</li>
+        <li><strong>/help</strong> - Get help about how to interact with the AI.</li>
+        <li><strong>/schedule [seconds] [message]</strong> - Schedule a message to be sent after a specified number of seconds. Example: "/schedule 10 Hello there!" sends "Hello there!" after 10 seconds.</li>
+        <li>Type any other message to see how the AI will respond. It tries to understand and reply meaningfully!</li>
+      </ul>
+    </section>
   </main>
 
   <footer>
