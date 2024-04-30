@@ -2,23 +2,19 @@ document.addEventListener("DOMContentLoaded", function() {
   const chatHistory = document.getElementById("chat-history");
   const userInput = document.getElementById("user-input");
   const sendButton = document.getElementById("send-button");
-  const fs = require('fs');
-  let rawdata = fs.readFileSync('config.json');
-  let config = JSON.parse(rawdata);
-  const newsApiKey = config.newsApiKey;
-  const axios = require('axios');
-
+  
   async function fetchNews(keyword) {
-    try {
-      const response = await axios.get(`https://newsdata.io/api/1/news?apikey=${newsApiKey}&q=${keyword}`);
-      return response.data.results.map(article => `${article.title}: ${article.link}`).join('\n');
-    } catch (error) {
-      console.error('Error fetching news:', error);
-      return "Failed to retrieve news.";
+        try {
+            const response = await fetch(`/fetch-news?keyword=${encodeURIComponent(keyword)}`);
+            const articles = await response.json();
+            return articles.map(article => `${article.title}: ${article.link}`).join('\n');
+        } catch (error) {
+            console.error('Error fetching news:', error);
+            return "Failed to retrieve news.";
+        }
     }
-  }
 
- function addMessageToChat(message, sender) {
+function addMessageToChat(message, sender) {
   const messageElement = document.createElement("div");
   messageElement.className = 'message';
   messageElement.textContent = `${sender}: ${message}`;
@@ -80,13 +76,13 @@ function scheduleMessage(command) {
 
   function generateResponse(input) {
     if (input.toLowerCase().startsWith("news about")) {
-      const keyword = input.substring(11).trim();
-      if (keyword) {
-        return fetchNews(keyword);
-      } else {
-        return "Please specify a topic to get news about.";
-      }
+    const keyword = input.substring(11).trim();
+    if (keyword) {
+      return fetchNews(keyword);
+    } else {
+      return "Please specify a topic to get news about.";
     }
+  }
   if (input.startsWith("/")) {
     switch (input) {
       case "/help":
@@ -130,12 +126,16 @@ function scheduleMessage(command) {
     localStorage.setItem("chatHistory", chatHistory.innerHTML);
   }
 
-  sendButton.addEventListener("click", processUserInput);
-  userInput.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-      processUserInput();
-    }
-  });
+  sendButton.addEventListener("click", async () => {
+        const keyword = userInput.value.trim();
+        if (keyword.startsWith("news about")) {
+            const newsKeyword = keyword.substring(11).trim();
+            const news = await fetchNews(newsKeyword);
+            addMessageToChat(news, "Chat AI");
+        } else {
+            // Handle other input
+        }
+    });
 
   loadChatHistory();
 });
